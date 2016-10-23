@@ -3,36 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/quiz/admin/controller/actions_admin_c.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/controller/unset_sessions_c.php</file>
-            <file>file:/C:/wamp/www/quiz/quizzes_list/model/quizzes_list_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/question_creation/view/new_question.php</file>
-            <file>file:/C:/wamp/www/quiz/quizzes_list/controller/quizzes_list_c.php</file>
-            <file>file:/C:/wamp/www/quiz/quizzes_list/view/quizzes_list.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/add_answer/view/add_answer.php</file>
-            <file>file:/C:/wamp/www/quiz/quizz_details/view/quiz_details.php</file>
-            <file>file:/C:/wamp/www/quiz/quizz_details/model/quiz_details_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/model/bdd_connect_m.php</file>
-            <file>file:/C:/wamp/www/quiz/index.php</file>
-            <file>file:/C:/wamp/www/quiz/questions_list/model/questions_list_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/add_answer/model/add_answer_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/question_creation/model/new_question_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/quiz_creation/view/new_quiz.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/add_answer/view/add_answer_quiz.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/model/database_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/model/stats_quiz_m.php</file>
-            <file>file:/C:/wamp/www/quiz/quizz_details/view/error_answer.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/question_creation/model/new_answer_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/add_answer/view/add_answer_question.php</file>
             <file>file:/C:/wamp/www/quiz/quizz_details/view/quiz_score.php</file>
-            <file>file:/C:/wamp/www/quiz/answers_list/model/answers_list_m.php</file>
+            <file>file:/C:/wamp/www/quiz/admin/question_creation/view/new_answer.php</file>
             <file>file:/C:/wamp/www/quiz/quizz_details/controller/quiz_details_c.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/quiz_creation/model/new_quiz_m.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/question_creation/controller/new_question_c.php</file>
-            <file>file:/C:/wamp/www/quiz/quizz_details/view/quiz_details.css</file>
-            <file>file:/C:/wamp/www/quiz/admin/view/actions_admin.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/add_answer/controller/add_answer_c.php</file>
-            <file>file:/C:/wamp/www/quiz/admin/quiz_creation/controller/new_quiz_c.php</file>
+            <file>file:/C:/wamp/www/quiz/quizz_details/model/quiz_details_m.php</file>
+            <file>file:/C:/wamp/www/quiz/admin/controller/actions_admin_c.php</file>
+            <file>file:/C:/wamp/www/quiz/admin/question_creation/view/new_question.php</file>
+            <file>file:/C:/wamp/www/quiz/admin/question_creation/view/new_answer_multiple.php</file>
+            <file>file:/C:/wamp/www/quiz/admin/question_creation/model/check_new_question_m.php</file>
+            <file>file:/C:/wamp/www/quiz/quizz_details/view/quiz_details_questions.php</file>
+            <file>file:/C:/wamp/www/quiz/admin/question_creation/model/new_answer_m.php</file>
+            <file>file:/C:/wamp/www/quiz/quizz_details/view/quiz_details.php</file>
         </group>
     </open-files>
 </project-private>
