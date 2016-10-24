@@ -10,7 +10,7 @@ function quiz($quizId) {
 
 function question($quizId) {
     global $bdd;
-    $data = $bdd->prepare('SELECT DISTINCT question_id, question FROM v_quiz_details
+    $data = $bdd->prepare('SELECT DISTINCT question_id, question, multiple_answers FROM v_quiz_details
                             WHERE quiz_id = :quizId;');
     $data->bindParam(':quizId', $quizId, PDO::PARAM_INT);
     $data->execute();
@@ -33,17 +33,5 @@ function result($quizId, $questionId) {
     $data->bindParam(':quizId', $quizId, PDO::PARAM_INT);
     $data->bindParam(':questionId', $questionId, PDO::PARAM_INT);
     $data->execute();
-    return $data->fetch();
+    return $data->fetchAll();
 }
-//$data->closeCursor();
-    /*
-    $data = $bdd->prepare('SELECT question_id, question FROM v_quiz_details
-                            WHERE quiz_id = :quizId;');
-    $data->bindParam(':quizId', $quizId, PDO::PARAM_INT);
-    $data->execute();
-    $questions = $data->fetchAll();
-    //$data->closeCursor();
-    */
-    
-
-

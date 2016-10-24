@@ -12,6 +12,7 @@ unset($_SESSION['answer']);
 unset($_SESSION['errorNoCorrectAnswer']);
 unset($_SESSION['questionOK']);
 unset($_SESSION['answerOK']);
+unset($_SESSION['duplicateQuestion']);
 
 include '../../admin/model/bdd_connect_m.php';
 include_once '../model/quizzes_list_m.php';

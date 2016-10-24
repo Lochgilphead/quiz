@@ -24,7 +24,21 @@
                     <div>
                         <br/><label for="questions">Saisissez votre question : </label><br/>
                         <textarea name="question" id="questions" cols="50" rows="1"></textarea>
+                        <span><?php if (isset($_SESSION['errorNoQuestion'])) echo $_SESSION['errorNoQuestion'];
+                                    if (isset($_SESSION['duplicateQuestion'])) echo $_SESSION['duplicateQuestion'];?></span><br>
+                        <div>
+                            Question avec plusieurs bonnes réponses?
+                            <label>Oui :<input type="radio" name="reponse" value="Y"></label>
+                            <label>Non :<input type="radio" name="reponse" value="N" checked></label>
+                        </div>
+                        <div>
+                            <input type="submit" value="Validez!">
+                        </div>
                     </div>
+                </form>
+            </fieldset>
+            
+                <!--
                     <div>
                         <br/><label>Saisissez les réponses (au moins 2) à la question et cochez la case si la réponse est bonne : </label><br/>
                         <span><?php if (isset($_SESSION['errorNoQuestion'])) echo $_SESSION['errorNoQuestion'];?></span><br>
@@ -50,6 +64,7 @@
                     <input type="submit" value="OK">
                 </form> 
             </fieldset>
+                -->
         </section>
     </body>
 </html>
