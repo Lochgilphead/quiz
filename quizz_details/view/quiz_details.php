@@ -22,7 +22,7 @@
         <?php      
         foreach ($question as $questions) {?>
         <ol id="question">
-        <?php echo '<br>'.'<h4>'.$questions['question'].'</h4>';
+        <?php echo '<br>'.'<h4>'.(($nbTotQuestions+1)-($nbQuestions--)).' '.$questions['question'].'</h4>';
         //$b = result($quizId, $questions['question_id']);?>
         
         <?php
@@ -34,73 +34,46 @@
                 <?php echo $answers['answer'];?>
                     
                     <?php include '../view/quiz_details_questions.php';
-                 //   $b = result($quizId, $questions['question_id']);
+                    $bonsResultats = result($quizId, $questions['question_id']);
                     ?>
                     
                         
                 <?php
-               /* if (isset($results)){
-                    
-                    foreach ($b as $c) {
-                        if ($c[0] == $answers['answer_id']) {
-                            $goodAnswer = $questions['question_id'].'-'.$c[0];
-                            echo '<b>'.$goodAnswer.'</b>';
-                            $theResult = array('id' => $goodAnswer);//, 'quest' => $questions['question_id'], 'questGood' => $goodAnswer) ;
-                            echo $theResult['id'];
-                                    foreach($results as $questionID => $answerID ){
-                                        if (($questionID == $goodAnswer) || $answerID == $c[0]){
-                                            $yourResult = array('id' => $goodAnswer, 'quest' => $questions['question_id'], 'questGood' => ($questions['question_id'].'-'.$answerID));
-                                        } else {
-                                            $yourResult = array('id' => $goodAnswer, 'quest' => $questions['question_id'], 'questGood' => ($questions['question_id'].'-'.'0'));
-                                        }
-                                        //if (isset($yourResult))var_dump($yourResult);
-                                    }
-                                    
-                                    
-                            
-                        }
-                    }
-                 /*   
-                    if (in_array($answers['answer_id'], $results)) {
-                        $result = result($quizId, $questions['question_id']);
-                    
-                        //foreach ($results as $a) {
-                        var_dump($result);
-                        foreach($result as $a) {
-                            echo $a[0];
-                        if ($a[0] == $answers['answer_id']) { //$answers['answer_id']
-                            $_SESSION['goodAnswer'] = $_SESSION['goodAnswer'] + 1; ?>
-                            
-                <span class="good">Bonne réponse!</span>
                 
-                        <?php
-                        } else {; ?>
-                <span class="bad">Mauvaise réponse!</span>
-                <?php };
+                if (isset($results)){
+                    
+                    $nbr = array();
+                    
+                    foreach ($bonsResultats as $bonsResultat) {
+                        if ($bonsResultat[0] == $answers['answer_id']) {
+                            $nbr = $answers['answer_id'];                           
+                            echo '<span class="good">Bonne réponse!</span>';
+                        }                      
+                    }
+                    
+                    foreach ($results as $answerID => $questionID) {
+                        if ($questionID == $questions['question_id']) {
+                            if ($answerID == $answers['answer_id']) {
+                                if (isset($nbr[0]) != $answerID) {
+                                echo '<span class="bad">Mauvaise réponse!</span>';
+                                }
+                            }
                         }
-                }}
+                    }                   
+                }
 
-                */
                     ?>
                 </label>
                 <br>
                 </li>
         
-        <?php
-             /*   }*/
-                
-                                        }
-                
+        <?php                
+                    }              
             }
-        // if (isset($yourResult))var_dump($yourResult);
-        //    echo '<br>';
-        //if (isset($theResult))var_dump($theResult);    
-        //    echo '<br>';
+            
             ?>
         </ol>
-                
-         
-        
+      
         <?php
 
         }

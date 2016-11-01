@@ -14,7 +14,7 @@
             <?php
             foreach ($listQuiz as $quiz) {
                 ?>
-            <div><a href="../../quizz_details/controller/quiz_details_c.php?quizId=<?php echo $quiz['quizId'];?>"><?php echo $quiz['quiz'].' ';?></a><span><?php echo $quiz['nbQuestions'].' questions...';?></span></div><br>
+            <div><a href="../../quizz_details/controller/quiz_details_c.php?quizId=<?php echo $quiz['quizId'];?>"><?php echo $quiz['quiz'].' ';?></a><span><?php echo '...'.$quiz['nbQuestions'].' questions...';?></span></div><br>
             <?php 
             } ?>
         </section>

@@ -11,6 +11,9 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
     $question = question($quizId);
     $answer = answer($quizId);
     
+    $nbQuestions = count($question);
+    $nbTotQuestions = count($question);
+    
     
     if(isset($_POST['resultRadio']) || isset($_POST['resultCheckbox'])) {
         
