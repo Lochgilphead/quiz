@@ -19,4 +19,15 @@ include_once '../model/quizzes_list_m.php';
 $listQuiz = quizList();
 
 
+
+if (isset($_POST['userId']) && isset($_POST['user'])) {
+    $_SESSION['userId'] = $_POST['userId'];
+    $_SESSION['user'] = $_POST['user'];
+}
+
+if (isset($_SESSION['user']) && isset($_SESSION['userId'])) {
+    echo 'Eh, '.'<b>'.$_SESSION['user'].'</b>'.'<br><br>Choisissez un quiz...';
+} else {
+    header('location: ../../users/sign_in/control/sign_in_c.php');
+}
 include '../view/quizzes_list.php';

@@ -7,6 +7,7 @@
     </head>
     <body>
         <header>
+            <h5><a href="../../users/sign_in/control/sign_in_c.php">Se connecter</a></h5>
             <h4><a href="../../admin/controller/actions_admin_c.php">Création de quiz</a></h4>
             <h1>Liste des quizs :</h1>
         </header>
