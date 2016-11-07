@@ -3,11 +3,13 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 include '../../../admin/model/bdd_connect_m.php';
 include '../model/sign_in_m.php';
 
-session_destroy();
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = htmlspecialchars($_POST['username']);
     $password = sha1('Dark'.$_POST['password'].'Vador');
+    
+    echo $username;
+    echo $password;
 
     $user = signIn($username, $password);
 

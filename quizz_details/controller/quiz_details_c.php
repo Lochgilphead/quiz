@@ -2,11 +2,21 @@
 if (session_status() === PHP_SESSION_NONE) session_start();
 include '../../admin/model/bdd_connect_m.php';
 include '../model/quiz_details_m.php';
+include '../../scores/model/scores_m.php';
 
 if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
-    if (quiz($_GET['quizId'])) {
     $_SESSION['quizId'] = $_GET['quizId'];
     $quizId = $_SESSION['quizId'];
+    $user = $_SESSION['user'];
+    $userId = $_SESSION['userId'];
+    
+    $submittedQuiz = submittedQuiz($userId, $quizId); 
+    
+    if ($submittedQuiz[0] > 0) {
+        header('location: ../../quizzes_list/controller/quizzes_list_c.php');
+    } else {
+    
+    if (quiz($_GET['quizId'])) {
     $quiz = quiz($quizId);
     $question = question($quizId);
     $answer = answer($quizId);
@@ -78,7 +88,9 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
 
             if (isset($nbCorrectQuestions)) {
                 $score = ceil(($nbCorrectQuestions/count($question))*100).' % de bonnes réponses!';
-                include '../view/quiz_score.php';
+                
+                $scoreId = insertScoreQuiz($userId, $quizId, $score);
+                include '../../scores/view/quiz_score.php';
                 
             }
             
@@ -92,6 +104,7 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
     }
     } else {
         header('location: ../../quizzes_list/controller/quizzes_list_c.php');
+    }
     }
     
     } 
