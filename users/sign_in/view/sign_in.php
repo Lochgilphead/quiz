@@ -5,8 +5,7 @@
         <title>Utilisateur Existant</title>
     </head>
     <body>
-        <section>
-            <h5><a href="../../create_users/control/create_users_c.php">Enregistrez-vous!</a></h5>
+        <section>           
             <form method="post">
                 <fieldset>
                     <legend>Veuillez saisir votre nom d'utilisateur et votre mot de passe</legend>

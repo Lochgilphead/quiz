@@ -1,5 +1,6 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
+unset($_SESSION['submittedQuiz']);
 include '../../admin/model/bdd_connect_m.php';
 include '../model/quiz_details_m.php';
 include '../../scores/model/scores_m.php';
@@ -12,7 +13,9 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
     
     $submittedQuiz = submittedQuiz($userId, $quizId); 
     
-    if ($submittedQuiz[0] > 0) {
+    if ($submittedQuiz['number'] > 0) {
+        $_SESSION['submittedQuiz'] = 'Vous avez déja fait ce quiz!';
+        $_SESSION['previousResult'] = $submittedQuiz['results'];
         header('location: ../../quizzes_list/controller/quizzes_list_c.php');
     } else {
     

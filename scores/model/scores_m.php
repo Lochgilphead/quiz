@@ -12,7 +12,7 @@ function insertScoreQuiz($userId, $quizId, $score) {
 
 function submittedQuiz($userId, $quizId) {
     global $bdd;
-    $data = $bdd->prepare('SELECT count(*) FROM results WHERE user_id = :userId AND quiz_id = :quizId;');
+    $data = $bdd->prepare('SELECT count(*) number, results FROM results WHERE user_id = :userId AND quiz_id = :quizId group by results;');
     $data->bindParam(':userId', $userId, PDO::PARAM_INT);
     $data->bindParam(':quizId', $quizId, PDO::PARAM_INT);
     $data->execute();

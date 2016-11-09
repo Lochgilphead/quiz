@@ -3,13 +3,12 @@ if (session_status() === PHP_SESSION_NONE) session_start();
 include '../../../admin/model/bdd_connect_m.php';
 include '../model/sign_in_m.php';
 
+unset($_SESSION['submittedQuiz']);
+
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = htmlspecialchars($_POST['username']);
     $password = sha1('Dark'.$_POST['password'].'Vador');
-    
-    echo $username;
-    echo $password;
 
     $user = signIn($username, $password);
 
@@ -17,7 +16,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['user'] = $user['user'];
         $_SESSION['userId'] = $user['user_id'];
         header('location: ../../../quizzes_list/controller/quizzes_list_c.php');
-    } else $wrongUserPwd = '<br><b>La combinaison \'utilisateur - mot de passe\' saisie n\'existe pas!</b>';
+    } else {
+        $wrongUserPwd = '<br><b>La combinaison \'utilisateur - mot de passe\' saisie n\'existe pas, </b>'.
+            '<a href="../../create_users/control/create_users_c.php">enregistrez-vous!</a>';
+    }
 }
 
 include '../view/sign_in.php';
