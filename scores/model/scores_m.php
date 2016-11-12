@@ -19,5 +19,10 @@ function submittedQuiz($userId, $quizId) {
     return $data->fetch();
 }
 
-
+function scoreQuiz() {
+    global $bdd;
+    $data = $bdd->prepare('SELECT * FROM v_scores_quizs ORDER BY quiz, results DESC;');
+    $data->execute();
+    return $data->fetchAll();
+}
 

@@ -5,6 +5,9 @@
         <title>Utilisateur Existant</title>
     </head>
     <body>
+        <nav>
+            <a href="../../create_users/control/create_users_c.php">Créez un utilisateur</a>
+        </nav>
         <section>           
             <form method="post">
                 <fieldset>
