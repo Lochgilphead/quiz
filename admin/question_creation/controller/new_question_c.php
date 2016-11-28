@@ -14,6 +14,11 @@ if((isset($_POST['newQuestions']) && $_POST['newQuestions'] == 'Questions') OR i
         $question = htmlspecialchars(trim($_POST['question']));
         $_SESSION['question'] = $question;
         $reponse = $_POST['reponse'];
+        var_dump($reponse);
+        $digit = $_POST['digit'];
+        var_dump($digit);
+        $order = $_POST['order'];
+        var_dump($order);
         unset($_SESSION['errorNoQuestion']);
         $_SESSION['questionOK'] = 'Y'; //on crée une variable qui valide la présence de la question dans le formulaire
         $newQuestion = checkNewQuestion($question); 
@@ -21,7 +26,7 @@ if((isset($_POST['newQuestions']) && $_POST['newQuestions'] == 'Questions') OR i
             $_SESSION['duplicateQuestion'] = 'La question a déja été saisie!!!';
         } else {
             unset($_SESSION['duplicateQuestion']);
-            $_SESSION['$questionId'] = newQuestion($quizId, $question, $reponse);
+            $_SESSION['$questionId'] = newQuestion($quizId, $question, $reponse, $digit, $order);
             $questionId = $_SESSION['$questionId'];
         }
         
@@ -35,11 +40,36 @@ if((isset($_POST['newQuestions']) && $_POST['newQuestions'] == 'Questions') OR i
 
 if(!empty($questionId)) {
     $questionCreated = listQuestion($questionId);
-    if($questionCreated['multiple_answers'] == 'N') {
+    if ($questionCreated['digits'] == 'Y') {
+        include '../question_creation/view/digit_answer.php';
+    } elseif ($questionCreated['ordered'] == 'Y') {
+        include '../question_creation/view/ordered_answer.php';
+    } elseif($questionCreated['multiple_answers'] == 'N') {
         include '../question_creation/view/new_answer.php';
     } else {
         include '../question_creation/view/new_answer_multiple.php';
     }
+}
+
+if(isset($_POST['number']) && !empty(trim($_POST['number']))) {
+    $answer = htmlspecialchars($_POST['digit']);
+    $quizId = $_SESSION['quizId'];
+    $questionId = $_SESSION['$questionId'];
+    if(newAnswerDigits($quizId, $questionId, $answer)) echo 'Vous avez créé la question D: '.$_SESSION['question'];
+}
+
+if(isset($_POST['ordered'])) {
+        $nbAnswer = array();  
+        for($i=1; $i<6 ; $i++) {
+            if(isset($_POST["answer"."$i"]) && !empty(trim($_POST["answer"."$i"]))) {
+                $answer = htmlspecialchars(trim($_POST["answer"."$i"]));
+                if(isset($_POST["number"."$i"])){
+                    $result = $_POST["number"."$i"];
+                }
+                $nbAnswer[] = array('answer'=>$answer, 'result'=>$result);
+            }
+        }
+        var_dump($nbAnswer);
 }
 
 if(isset($_POST['single'])) {
@@ -96,7 +126,7 @@ if (count($nbAnswer) < 2) {
                 $checkResult[] = $value['result'];
             }
             $resultY = in_array('Y', $checkResult);
-            if(!$resultY) {
+            if(!$resultY && (isset($_POST['single']) || isset($_POST['multiple']))) {
                unset($_SESSION['answerOK']);
                $_SESSION['errorNoCorrectAnswer'] = 'Il faut cocher la case à côté de la bonne réponse!';               
             } else {
@@ -111,8 +141,17 @@ if (count($nbAnswer) < 2) {
         if(isset($_SESSION['answerOK']) && $_SESSION['answerOK'] === 'Y') {
             $quizId = $_SESSION['quizId'];
             $questionId = $_SESSION['$questionId'];
-         if(newAnswer($quizId, $questionId, $nbAnswer)) echo 'Vous avez créé la question : '.$_SESSION['question'];            
-        }
+         if (isset($_POST['ordered'])) {
+             if(newAnswerOrder($quizId, $questionId, $nbAnswer)) echo 'Vous avez créé la question A: '.$_SESSION['question'];
+         } elseif(newAnswer($quizId, $questionId, $nbAnswer)) 
+            { 
+             echo 'Vous avez créé la question B: '.$_SESSION['question'];  
+            } else {
+        var_dump($quizId);
+        var_dump($questionId);
+        var_dump($nbAnswer);
     }
+        }
+    } 
 }
         

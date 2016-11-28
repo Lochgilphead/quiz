@@ -27,9 +27,19 @@
                         <span><?php if (isset($_SESSION['errorNoQuestion'])) echo $_SESSION['errorNoQuestion'];
                                     if (isset($_SESSION['duplicateQuestion'])) echo $_SESSION['duplicateQuestion'];?></span><br>
                         <div>
-                            Question avec plusieurs bonnes réponses?
+                            [QCM] Question avec plusieurs bonnes réponses?
                             <label>Oui :<input type="radio" name="reponse" value="Y"></label>
                             <label>Non :<input type="radio" name="reponse" value="N" checked></label>
+                        </div>
+                        <div>
+                            [Nombre à saisir] Question avec un chiffre comme unique réponse?
+                            <label>Oui :<input type="radio" name="digit" value="Y"></label>
+                            <label>Non :<input type="radio" name="digit" value="N" checked></label>
+                        </div>
+                        <div>
+                            [Eléments à ordonner] Question avec un ordre à renseigner comme réponse?
+                            <label>Oui :<input type="radio" name="order" value="Y"></label>
+                            <label>Non :<input type="radio" name="order" value="N" checked></label>
                         </div>
                         <div>
                             <input type="submit" value="Validez!">

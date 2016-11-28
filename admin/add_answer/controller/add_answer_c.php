@@ -19,7 +19,7 @@ if((isset($_POST['newAnswers']) && $_POST['newAnswers'] == 'Réponses') OR isset
         $_SESSION['quizName'] = substr($quizN[0],1);
         $_SESSION['quizId'] = substr($quizI[0],0,1);
         $quizId = $_SESSION['quizId'];
-        $questionList = questionList($quizId);   
+        $questionList = questionList($quizId);
         
         include '../add_answer/view/add_answer_question.php';
     }
@@ -38,17 +38,33 @@ if((isset($_POST['newAnswers']) && $_POST['newAnswers'] == 'Réponses') OR isset
         
     }
     
-    if (isset($_POST['questionToAdd']) && !empty($_POST['questionToAdd'])) {
+    if (isset($_POST['questionToAdd']) || isset($_POST['number']) || isset($_POST['order'])) {
         $quizId = $_SESSION['quizId'];
         $questId = $_SESSION['questId'];
+        
+    if (isset($_POST['questionToAdd']) && !empty($_POST['questionToAdd'])) {
         $answer = htmlspecialchars($_POST['questionToAdd']);
         $result = !empty($_POST['result']) == 'on'? 'Y': 'N';
         if($addAnswer = addAnswer($quizId, $questId, $answer, $result)) {
             echo 'La réponse: "'.$answer.'" a été ajoutée';
         } else {
         echo 'La réponse: "'.$answer.'" n\'a pas été ajoutée';        
+        }  
+    } elseif (isset ($_POST['number'])) {
+        $number = !empty($_POST['number']);
+        if(addAnswerNumber($quizId, $questId, $number)) {
+            echo 'La réponse: "'.$number.'" a été ajoutée';
+        } else {
+        echo 'La réponse: "'.$number.'" n\'a pas été ajoutée'; 
         }
-    
-    }
-    
+    } elseif (isset ($_POST['order'])) {
+        $answer = htmlspecialchars($_POST['answer']);
+        $order = !empty($_POST['order']);
+        if(addAnswerOrder($quizId, $questId, $answer, $order)) {
+            echo 'La réponse: "'.$answer.'" a été ajoutée';
+        } else {
+        echo 'La réponse: "'.$answer.'" n\'a pas été ajoutée';
+        }
+    }    
+   }
 }

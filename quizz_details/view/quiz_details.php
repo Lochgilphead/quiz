@@ -22,7 +22,7 @@
         <?php      
         foreach ($question as $questions) {?>
         <ol id="question">
-        <?php echo '<br>'.'<h4>'.(($nbTotQuestions+1)-($nbQuestions--)).' '.$questions['question'].'</h4>';
+        <?php echo '<br>'.'<h4>'.(($nbTotQuestions+1)-($nbQuestions--)).' > '.$questions['question'].'</h4>';
         //$b = result($quizId, $questions['question_id']);?>
         
         <?php

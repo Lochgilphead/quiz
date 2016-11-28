@@ -9,7 +9,7 @@ function checkNewQuestion($question) {
 
 function listQuestion($questionId) {
     global $bdd;
-    $data = $bdd->prepare('SELECT question_id, question, multiple_answers FROM questions WHERE question_id = :questionId;');
+    $data = $bdd->prepare('SELECT question_id, question, multiple_answers, digits, ordered FROM questions WHERE question_id = :questionId;');
     $data->bindParam(':questionId', $questionId, PDO::PARAM_STR);
     $data->execute();
     return $data->fetch();
