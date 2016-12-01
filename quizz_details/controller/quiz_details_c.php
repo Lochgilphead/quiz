@@ -45,6 +45,35 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
             $flipedResultsRadio = array_flip($flipResultsRadio);
             $results = $flipedResultsRadio + $resultCheckbox;
         }
+        if (isset($_POST['resultDigits'])) {
+            $resultDigits = $_POST['resultDigits'];
+            //var_dump($resultDigits);
+            foreach ($resultDigits as $resultDigit => $val) {
+                $resultDi[] = $resultDigit;
+            }
+            foreach($resultDi as $resultD){
+                    preg_match('#-(.+)#', $resultD, $resultDigitQuestionID[]);
+                    preg_match('#-(.+)#', $resultD, $resultDigitAnswerID[]);
+            }            
+            for($i = 0; $i < count($resultDigitQuestionID); $i++) {
+                $digitResults[$resultDigitAnswerID[$i][1]] = $resultDigitQuestionID[$i][1];
+            }
+        }
+        if (isset($_POST['resultOrdered'])) {
+            $resultOrdered = $_POST['resultOrdered'];
+            foreach ($resultOrdered as $resultOrder => $val) {
+                $resultOr[] = $resultOrder;
+            }
+            foreach($resultOr as $resultO){
+                    preg_match('#-(.+)#', $resultO, $resultOrderQuestionID[]);
+                    preg_match('#(.+)-#', $resultO, $resultOrderAnswerID[]);
+            }            
+            for($i = 0; $i < count($resultOrderQuestionID); $i++) {
+                $orderResults[$resultOrderAnswerID[$i][1]] = $resultOrderQuestionID[$i][1];
+            }
+        }
+                
+        $results = $results + $digitResults + $orderResults;
         
         //Définition du nombre de questions répondues
         $uniqueQuestionID = array_unique($results);
