@@ -29,7 +29,7 @@ function newAnswerOrder($quizId, $questionId, $nbAnswer){
         $data->bindParam(':questionId', $questionId, PDO::PARAM_INT);
         $data->bindParam(':quizId', $quizId, PDO::PARAM_INT);
         $data->bindParam(':answer', $answer['answer'], PDO::PARAM_STR);
-        $data->bindParam(':order', $answer['result'], PDO::PARAM_INT);
+        $data->bindParam(':order', $answer['result'], PDO::PARAM_STR);
         $data->execute();
     }
     return $bdd->lastInsertId();

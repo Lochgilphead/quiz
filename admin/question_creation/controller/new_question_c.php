@@ -52,7 +52,7 @@ if(!empty($questionId)) {
 }
 
 if(isset($_POST['number']) && !empty(trim($_POST['number']))) {
-    $answer = htmlspecialchars($_POST['digit']);
+    $answer = htmlspecialchars($_POST['number']);
     $quizId = $_SESSION['quizId'];
     $questionId = $_SESSION['$questionId'];
     if(newAnswerDigits($quizId, $questionId, $answer)) echo 'Vous avez créé la question D: '.$_SESSION['question'];
@@ -69,7 +69,6 @@ if(isset($_POST['ordered'])) {
                 $nbAnswer[] = array('answer'=>$answer, 'result'=>$result);
             }
         }
-        var_dump($nbAnswer);
 }
 
 if(isset($_POST['single'])) {

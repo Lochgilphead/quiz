@@ -47,22 +47,24 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
         }
         if (isset($_POST['resultDigits'])) {
             $resultDigits = $_POST['resultDigits'];
-            //var_dump($resultDigits);
             foreach ($resultDigits as $resultDigit => $val) {
-                $resultDi[] = $resultDigit;
+                $resultDi[] = $val.'_'.$resultDigit;
+            
             }
             foreach($resultDi as $resultD){
                     preg_match('#-(.+)#', $resultD, $resultDigitQuestionID[]);
-                    preg_match('#-(.+)#', $resultD, $resultDigitAnswerID[]);
+                    //$valDi[] = $val;
+                    preg_match('#(.+)_#', $resultD, $resultDigitAnswerID[]);
             }            
             for($i = 0; $i < count($resultDigitQuestionID); $i++) {
-                $digitResults[$resultDigitAnswerID[$i][1]] = $resultDigitQuestionID[$i][1];
+                $digitResults[$resultDigitAnswerID[$i][1].'-'.$i] = $resultDigitQuestionID[$i][1];
+                //$digitResults[$valDi[$i][1]] = $resultDigitQuestionID[$i][1];
             }
         }
         if (isset($_POST['resultOrdered'])) {
             $resultOrdered = $_POST['resultOrdered'];
             foreach ($resultOrdered as $resultOrder => $val) {
-                $resultOr[] = $resultOrder;
+                $resultOr[] = $val.'_'.$resultOrder;
             }
             foreach($resultOr as $resultO){
                     preg_match('#-(.+)#', $resultO, $resultOrderQuestionID[]);
@@ -73,20 +75,40 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
             }
         }
                 
-        $results = $results + $digitResults + $orderResults;
-        
+        if (isset($digitResults)) {
+            if (isset($orderResults)) {
+            $results = $results + $digitResults + $orderResults;
+            } else {
+            $results = $results + $digitResults;    
+            }
+        } elseif (isset ($orderResults)) {
+        $results = $results + $orderResults;
+    }
+    
+    /*foreach ($question as $q){
+        if ($q['q_digit'] == 'Y'){
+            echo $q['q_digit'].'<br>';
+        }
+    }*/  
+ //var_dump($digitResults);
+ //var_dump($orderResults);
+ var_dump($results);
         //Définition du nombre de questions répondues
         $uniqueQuestionID = array_unique($results);
-        
+    //var_dump($uniqueQuestionID);
         /* contrôle nb questions répondues / nb de bonnes réponses
          echo 'nb of questions answered: '.count($uniqueQuestionID);
          echo 'Good Results From Answered Questions :<br>';
          echo '<b>'.$nbCorrectQuestions.'</b>';
         */
-         
+        
          $nbCorrectQuestions = 0;
+         
          foreach ($uniqueQuestionID as $questionID) {       //On prend chaque question à laquelle on a répondu
-             $nbGoodAnswers = 0;                            
+             $nbGoodAnswers = 0;
+             
+             include 'quiz_details_digit_c.php';
+             
              $goodResults = result($quizId, $questionID);   //On trouve les bonnes réponses (answer_id)
              foreach ($goodResults as $gr){                 //Pour chaque bonne réponse (1 ou plusieurs)
                 
@@ -104,6 +126,7 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
             }
              $nbGoodResults = count($goodResults);          //On compte le nb de bonnes réponses 'absolues' existantes à chaque question
  
+             //var_dump($nbGoodAnswers);
             if (isset($nbAnswers)) {                        //On détermine si on a répondu à une bonne question (si le nb de bonnes réponses répondues = nb de bonnes réponses 'absolues') 
                  
                  if (count($nbAnswers) == $nbGoodAnswers) { ////Si nb de nos bonnes réponse = nb de réponses auxquelles on a répondu (lorsqu'on coche une mauvaise réponse, toute la réponse est fausse) 
@@ -116,12 +139,18 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
          
         if (count($uniqueQuestionID) == count($question)) { //Vérification que toutes les questions ont été répondues           
             include '../view/quiz_details.php';
-            
+
+$finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrder);
+
+//echo '<b>'.count($resultQuizOrder).'</b>';
+//var_dump($nbGoodQuesId);
+//var_dump($resultQuizOrder);
+//var_dump(QuestionOrderAnswer($c));
 
             if (isset($nbCorrectQuestions)) {
-                $score = ceil(($nbCorrectQuestions/count($question))*100).' % de bonnes réponses!';
+                $score = ceil(($finalScore/count($question))*100).' % de bonnes réponses!';
                 
-                $scoreId = insertScoreQuiz($userId, $quizId, $score);
+                //$scoreId = insertScoreQuiz($userId, $quizId, $score);
                 include '../../scores/view/quiz_score.php';
                 
             }
