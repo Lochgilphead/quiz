@@ -109,7 +109,7 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
              
              include 'quiz_details_digit_c.php';
              
-             $goodResults = result($quizId, $questionID);   //On trouve les bonnes réponses (answer_id)
+             $goodResults = resultMultipleChoice($quizId, $questionID);   //On trouve les bonnes réponses (answer_id)
              foreach ($goodResults as $gr){                 //Pour chaque bonne réponse (1 ou plusieurs)
                 
              $nbAnswers = array();

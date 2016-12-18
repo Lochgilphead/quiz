@@ -31,35 +31,35 @@
                     
                     ?>
             <li id="answer"><label>
-                <?php echo $answers['answer'];?>
+                <?php echo $answers['answer'];
                     
-                    <?php include '../view/quiz_details_questions.php';
-                    $bonsResultats = result($quizId, $questions['question_id']);
-                    ?>
-                    
-                        
-                <?php
+                    include '../view/quiz_details_questions.php';                 
                 
-                if (isset($results)){
+                if (isset($results)){                    
                     
-                    $nbr = array();
                     
-                    foreach ($bonsResultats as $bonsResultat) {
-                        if ($bonsResultat[0] == $answers['answer_id']) {
-                            $nbr = $answers['answer_id'];                           
-                            echo '<span class="good">Bonne réponse!</span>';
-                        }                      
-                    }
+                    if ($questions['q_order'] == 'N' && $questions['q_digit'] == 'N') {
+                        $nbr = array();
+                        $bonsResultatsMultipleChoice = resultMultipleChoice($quizId, $questions['question_id']);
+                        foreach ($bonsResultatsMultipleChoice as $bonsResultat) {
+                            if ($bonsResultat[0] == $answers['answer_id']) {
+                                $nbr = $answers['answer_id'];                           
+                                echo '<span class="good">Bonne réponse!</span>';
+                            }                      
+                        }
                     
-                    foreach ($results as $answerID => $questionID) {
-                        if ($questionID == $questions['question_id']) {
-                            if ($answerID == $answers['answer_id']) {
-                                if (isset($nbr[0]) != $answerID) {
-                                echo '<span class="bad">Mauvaise réponse!</span>';
+                        foreach ($results as $answerID => $questionID) {
+                            if ($questionID == $questions['question_id']) {
+                                if ($answerID == $answers['answer_id']) {
+                                    if (isset($nbr[0]) != $answerID) {
+                                    echo '<span class="bad">Mauvaise réponse!</span>';
+                                    }
                                 }
                             }
-                        }
-                    }                   
+                        }                                   
+                    } elseif ($questions['q_order'] == 'Y' && $questions['q_digit'] == 'N') {
+                        include '../controller/quiz_details_order_c.php';
+                    }   
                 }
 
                     ?>

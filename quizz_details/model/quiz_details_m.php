@@ -26,7 +26,7 @@ function answer($quizId) {
     return $data->fetchAll();
 }
 
-function result($quizId, $questionId) {
+function resultMultipleChoice($quizId, $questionId) {
     global $bdd;
     $data = $bdd->prepare('SELECT answer_id FROM v_quiz_details
                             WHERE quiz_id = :quizId AND question_id = :questionId AND result = "Y"');
