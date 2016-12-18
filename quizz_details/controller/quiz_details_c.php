@@ -92,7 +92,7 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
     }*/  
  //var_dump($digitResults);
  //var_dump($orderResults);
- var_dump($results);
+ //var_dump($results);
         //Définition du nombre de questions répondues
         $uniqueQuestionID = array_unique($results);
     //var_dump($uniqueQuestionID);

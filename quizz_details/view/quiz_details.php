@@ -59,7 +59,9 @@
                         }                                   
                     } elseif ($questions['q_order'] == 'Y' && $questions['q_digit'] == 'N') {
                         include '../controller/quiz_details_order_c.php';
-                    }   
+                    } elseif ($questions['q_order'] == 'N' && $questions['q_digit'] == 'Y') {
+                        include '../controller/quiz_details_digit_display_c.php';
+                    }
                 }
 
                     ?>

@@ -30,7 +30,7 @@ foreach ($question as $ques){
         foreach ($goodResultsOrder as $answerIdOrder ){
             //$nbAnswers = array();
             
-                var_dump($answerIdOrder);
+                //var_dump($answerIdOrder);
                 //echo $answerIdOrder[0];
                 foreach ($results as $orderAnswerId => $questionId) {
                     if($ques['question_id'] == $questionId){
@@ -70,7 +70,7 @@ foreach ($question as $ques){
 $nbGoodQuesId = isset($nbQuestionId)? $nbQuestionId: array();
 $resultQuizOrder = array();
 foreach ($nbGoodQuesId as $questionId=>$goodQues) {
-    echo count($goodQues);
+    //echo count($goodQues);
    /*foreach($goodQues as $c) {
        echo $d.'<br>';
    }*/
