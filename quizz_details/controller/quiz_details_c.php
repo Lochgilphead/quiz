@@ -48,7 +48,6 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
         
         if (isset($_POST['resultDigits'])){            
             if (!in_array('',($_POST['resultDigits']))) {
-                var_dump($_POST['resultDigits']);
                 $resultDigits = $_POST['resultDigits'];
                 foreach ($resultDigits as $resultDigit => $val) {
                     $resultDi[] = $val.'_'.$resultDigit;            
@@ -113,7 +112,7 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
 
             if (isset($nbCorrectQuestions)) {
                 $score = ceil(($finalScore/count($question))*100).' % de bonnes réponses!';
-                
+                $scoreId = insertScoreQuiz($userId, $quizId, $score);
                 include '../../scores/view/quiz_score.php';
                 
             }
