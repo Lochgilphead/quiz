@@ -22,8 +22,7 @@
         <?php      
         foreach ($question as $questions) {?>
         <ol id="question">
-        <?php echo '<br>'.'<h4>'.(($nbTotQuestions+1)-($nbQuestions--)).' > '.$questions['question'].'</h4>';
-        //$b = result($quizId, $questions['question_id']);?>
+        <?php echo '<br>'.'<h4>'.(($nbTotQuestions+1)-($nbQuestions--)).' > '.$questions['question'].'</h4>';?>
         
         <?php
             foreach ($answer as $answers) {
@@ -34,36 +33,16 @@
                 <?php echo $answers['answer'];
                     
                     include '../view/quiz_details_questions.php';                 
-                
-                if (isset($results)){                    
-                    
-                    
+                //Affichage des bonnes et des mauvaises réponses selon le type de question
+                if (isset($results)){                                        
                     if ($questions['q_order'] == 'N' && $questions['q_digit'] == 'N') {
-                        $nbr = array();
-                        $bonsResultatsMultipleChoice = resultMultipleChoice($quizId, $questions['question_id']);
-                        foreach ($bonsResultatsMultipleChoice as $bonsResultat) {
-                            if ($bonsResultat[0] == $answers['answer_id']) {
-                                $nbr = $answers['answer_id'];                           
-                                echo '<span class="good">Bonne réponse!</span>';
-                            }                      
-                        }
-                    
-                        foreach ($results as $answerID => $questionID) {
-                            if ($questionID == $questions['question_id']) {
-                                if ($answerID == $answers['answer_id']) {
-                                    if (isset($nbr[0]) != $answerID) {
-                                    echo '<span class="bad">Mauvaise réponse!</span>';
-                                    }
-                                }
-                            }
-                        }                                   
+                        include '../controller/quiz_details_mcq_display_c.php';
                     } elseif ($questions['q_order'] == 'Y' && $questions['q_digit'] == 'N') {
-                        include '../controller/quiz_details_order_c.php';
+                        include '../controller/quiz_details_order_display_c.php';
                     } elseif ($questions['q_order'] == 'N' && $questions['q_digit'] == 'Y') {
                         include '../controller/quiz_details_digit_display_c.php';
                     }
                 }
-
                     ?>
                 </label>
                 <br>
@@ -90,10 +69,6 @@
                     <?php if (isset($score)) echo $score;?>
                 </aside>
             </form>
-            <?php
-            if (isset($theResult))var_dump($theResult);    
-            echo '<br>';
-            ?>
         </section>
     </body>
 </html>
