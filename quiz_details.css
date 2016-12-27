@@ -1,0 +1,36 @@
+ul {
+    list-style-type: none;
+}
+
+.good {
+    font-family: Verdana;
+    color: white;
+    background-color: greenyellow;
+}
+
+.bad {
+    font-family: Impact;
+     color: white;
+     background-color: red;
+}
+
+.result {
+    font-family: Courier New;
+    color: blue;
+    font-size: 2em;
+    text-align: center;
+}
+
+header {
+    font-family: Lucida Console;
+    font-size: 1.5em;
+    position: relative;
+    margin-top: 1em;
+}
+
+aside {
+    position: absolute;
+    top: 0;
+    left: 30%;
+}
+

@@ -21,7 +21,7 @@
             <form method="post">
         <?php      
         foreach ($question as $questions) {?>
-        <ol id="question">
+                <ul class="<?php echo 'q'.$questions['question_id'];?>">
         <?php echo '<br>'.'<h4>'.(($nbTotQuestions+1)-($nbQuestions--)).' > '.$questions['question'].'</h4>';?>
         
         <?php
@@ -53,7 +53,7 @@
             }
             
             ?>
-        </ol>
+        </ul>
       
         <?php
 

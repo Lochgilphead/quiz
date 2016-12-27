@@ -12,6 +12,7 @@ foreach ($bonResultatsOrder as $bonsResultat) {
                         if ($bonsResultat['answer_id'] == $myAnswerId) {
                             if ($bonOrder[0] != $myOrder) {
                                 echo '<span class="bad">Mauvaise réponse!</span>'.' Bonne réponse: '.'<span class="good"><b>'.$bonOrder[0].'</b></span>';
+                                $quesResOrder[$questions['question_id']] = 'q'.$questions['question_id'];
                             } else {
                                 echo '<span class="good">Bonne réponse! <b>'.$bonOrder[0].'</b></span>';
                             }

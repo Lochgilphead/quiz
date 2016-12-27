@@ -6,6 +6,10 @@ include '../model/quiz_details_m.php';
 include '../../scores/model/scores_m.php';
 
 if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
+    
+    $restoreCssFile = file_get_contents('../../quiz_details.css');
+    file_put_contents('../view/quiz_details.css', $restoreCssFile);
+    
     $_SESSION['quizId'] = $_GET['quizId'];
     $quizId = $_SESSION['quizId'];
     $user = $_SESSION['user'];
@@ -112,7 +116,7 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
 
             if (isset($nbCorrectQuestions)) {
                 $score = ceil(($finalScore/count($question))*100).' % de bonnes réponses!';
-                $scoreId = insertScoreQuiz($userId, $quizId, $score);
+                //$scoreId = insertScoreQuiz($userId, $quizId, $score);
                 include '../../scores/view/quiz_score.php';
                 
             }
@@ -121,6 +125,10 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
         } else {
             include '../view/error_answer.php';
         }
+        
+        //var_dump($quesRes);
+        
+        
     } else {        
         $_SESSION['goodAnswer'] = 0;
         include '../view/quiz_details.php';
@@ -130,7 +138,9 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
     }
     }
     
-    } 
+    }
+    
+    include 'quiz_details_answers_generate_css_c.php';
 
 
 

@@ -9,6 +9,7 @@ foreach ($results as $orderAnswerId => $questionId) {
             echo '<span class="good">Bonne réponse! <b>'.$bonDigit.'</b></span>';
         } else {
             echo '<span class="bad">Mauvaise réponse!</span>'.' Bonne réponse: '.'<span class="good"><b>'.$bonDigit.'</b></span>';
+            $quesResDigit[$questions['question_id']] = 'q'.$questions['question_id'];
         }
     }
 }

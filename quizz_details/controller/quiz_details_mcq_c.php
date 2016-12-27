@@ -23,6 +23,8 @@
                  if (count($nbAnswers) == $nbGoodAnswers) { ////Si nb de nos bonnes réponse = nb de réponses auxquelles on a répondu (lorsqu'on coche une mauvaise réponse, toute la réponse est fausse) 
                      if ($nbGoodResults == $nbGoodAnswers) {    ////Si notre nb de bonnes réponses = nb de bonnes réponses 'absolues'
                         $nbCorrectQuestions++;                      ///On incrémente un compteur, c.a.d une bonne réponse
+                     } else {
+                         $quesResMcq[] = 'q'.$questionID;
                      }
                  }
             }
