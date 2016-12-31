@@ -2,7 +2,6 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="../view/quiz_details.css"/>
         <title>
             <?php
                 echo $quiz['quiz'];
@@ -62,6 +61,7 @@
         ?>
                 <input type="submit" value="Go!">
         <?php if (isset($results)) {
+            include '../controller/quiz_details_answers_generate_css_c.php';
         ?>
                 <input type="submit" name="reset" value="Recommencez?">
         <?php }?>
@@ -70,5 +70,6 @@
                 </aside>
             </form>
         </section>
+    <link rel="stylesheet" href="../view/quiz_details.css"/>
     </body>
 </html>

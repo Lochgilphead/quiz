@@ -27,7 +27,7 @@ if (isset($quesResMcq) && isset($quesResOrder) && isset($quesResDigit)) {
     foreach ($quesResMcq as $quesRes){
         $qId[$quesRes] = $quesRes;
     }     
-}
+} 
 
     
 if (isset($quesResMcq) || isset($quesResOrder) || isset($quesResDigit)) {

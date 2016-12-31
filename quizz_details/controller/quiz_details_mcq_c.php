@@ -18,11 +18,10 @@
              $nbGoodResults = count($goodResults);          //On compte le nb de bonnes réponses 'absolues' existantes à chaque question
  
              //var_dump($nbGoodAnswers);
-            if (isset($nbAnswers)) {                        //On détermine si on a répondu à une bonne question (si le nb de bonnes réponses répondues = nb de bonnes réponses 'absolues') 
-                 
+            if (isset($nbAnswers)) {                        //On détermine si on a répondu à une bonne question (si le nb de bonnes réponses répondues = nb de bonnes réponses 'absolues')                  
                  if (count($nbAnswers) == $nbGoodAnswers) { ////Si nb de nos bonnes réponse = nb de réponses auxquelles on a répondu (lorsqu'on coche une mauvaise réponse, toute la réponse est fausse) 
                      if ($nbGoodResults == $nbGoodAnswers) {    ////Si notre nb de bonnes réponses = nb de bonnes réponses 'absolues'
-                        $nbCorrectQuestions++;                      ///On incrémente un compteur, c.a.d une bonne réponse
+                        $nbCorrectQuestions++;                      ///On incrémente un compteur, c.a.d une bonne réponse                        
                      } else {
                          $quesResMcq[] = 'q'.$questionID;
                      }

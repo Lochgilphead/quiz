@@ -34,3 +34,8 @@ aside {
     left: 30%;
 }
 
+input[type="number"], input[type="text"] {
+    width: 30px;
+}
+
+

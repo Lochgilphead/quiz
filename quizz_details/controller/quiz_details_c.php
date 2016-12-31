@@ -7,8 +7,8 @@ include '../../scores/model/scores_m.php';
 
 if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
     
-    $restoreCssFile = file_get_contents('../../quiz_details.css');
-    file_put_contents('../view/quiz_details.css', $restoreCssFile);
+    /*$restoreCssFile = file_get_contents('../../quiz_details.css');
+    file_put_contents('../view/quiz_details.css', $restoreCssFile);*/
     
     $_SESSION['quizId'] = $_GET['quizId'];
     $quizId = $_SESSION['quizId'];
@@ -107,8 +107,8 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
              include 'quiz_details_order_c.php';
              
          }
-         
-        if (count($uniqueQuestionID) == count($question)) { //Vérification que toutes les questions ont été répondues           
+        
+        if (count($uniqueQuestionID) == count($question)) { //Vérification que toutes les questions ont été répondues
             include '../view/quiz_details.php';
 
 $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrder);
@@ -126,11 +126,10 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
             include '../view/error_answer.php';
         }
         
-        //var_dump($quesRes);
-        
-        
     } else {        
         $_SESSION['goodAnswer'] = 0;
+        $restoreCssFile = file_get_contents('../../quiz_details.css');
+        file_put_contents('../view/quiz_details.css', $restoreCssFile);
         include '../view/quiz_details.php';
     }
     } else {
@@ -139,8 +138,6 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
     }
     
     }
-    
-    include 'quiz_details_answers_generate_css_c.php';
 
 
 
