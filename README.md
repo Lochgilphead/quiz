@@ -7,4 +7,6 @@ List of Functionalities:
 - Create Quiz, Questions, Users (with 'admin' user)
 - Create Users
 - List of Quizzes
-- Scores of Quizzes / Ranking per User 
+- Displays scores of submitted Quiz
+- Displays ranking per user & per quiz
+- Displays past results per user & quiz 
