@@ -10,7 +10,7 @@ $page = $_SERVER['PHP_SELF'];
     </head>
     <body>
         <?php
-        echo 'Vous devez répondre à toutes les questions!';
+            echo 'Vous devez répondre à toutes les questions!';
         ?>
     </body>
 </html>

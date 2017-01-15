@@ -21,7 +21,9 @@ function submittedQuiz($userId, $quizId) {
 
 function scoreQuiz() {
     global $bdd;
-    $data = $bdd->prepare('SELECT * FROM v_scores_quizs ORDER BY quiz, results DESC;');
+    $data = $bdd->prepare('SELECT quiz, quiz_id, user, user_id, max(results) AS results, result_id FROM v_scores_quizs 
+                           GROUP BY quiz, quiz_id, user, user_id
+                           ORDER BY quiz, results DESC;');
     $data->execute();
     return $data->fetchAll();
 }

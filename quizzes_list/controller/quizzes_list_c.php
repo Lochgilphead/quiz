@@ -19,7 +19,6 @@ include_once '../model/quizzes_list_m.php';
 $listQuiz = quizList();
 
 
-
 if (isset($_POST['userId']) && isset($_POST['user'])) {
     $_SESSION['userId'] = $_POST['userId'];
     $_SESSION['user'] = $_POST['user'];

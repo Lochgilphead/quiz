@@ -1,3 +1,15 @@
+td, th {
+    padding: 0.5em;
+}
+
+td {
+    border: 1px dashed #aaa;
+}
+
+th {
+    background: #cade5b;
+}
+
 ul {
     list-style-type: none;
 }
@@ -39,4 +51,3 @@ input[type="number"], input[type="text"] {
 }
 
 
-c ,.q29,.q12,.q13,.q18,.q20,.q24,.q25,.q27,.q45,.q52,.q53{font-family: Verdana; color: white; background-image:linear-gradient(yellow, red);}

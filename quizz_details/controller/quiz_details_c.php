@@ -1,20 +1,19 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
-unset($_SESSION['submittedQuiz']);
+//unset($_SESSION['submittedQuiz']);
 include '../../admin/model/bdd_connect_m.php';
 include '../model/quiz_details_m.php';
 include '../../scores/model/scores_m.php';
+include '../../scores/model/historic_answers_users_m.php';
 
 if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
-    
-    /*$restoreCssFile = file_get_contents('../../quiz_details.css');
-    file_put_contents('../view/quiz_details.css', $restoreCssFile);*/
-    
+        
     $_SESSION['quizId'] = $_GET['quizId'];
     $quizId = $_SESSION['quizId'];
     $user = $_SESSION['user'];
     $userId = $_SESSION['userId'];
     
+    /*Contrôle si le quizz a déja été soumis par un utilisateur
     $submittedQuiz = submittedQuiz($userId, $quizId); 
     
     if ($submittedQuiz['number'] > 0) {
@@ -22,6 +21,7 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
         $_SESSION['previousResult'] = $submittedQuiz['results'];
         header('location: ../../quizzes_list/controller/quizzes_list_c.php');
     } else {
+    */
     
     if (quiz($_GET['quizId'])) {
     $quiz = quiz($quizId);
@@ -33,21 +33,21 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
     
     
     if(isset($_POST['resultRadio']) || isset($_POST['resultCheckbox'])) {
-        
+                
         //Définition des différentes valeurs de $results selon l'existence des variables $_POST
         //Valeurs de la variable $results sont les question_id
         if (isset($_POST['resultRadio']) && !isset($_POST['resultCheckbox'])) {
             $flipResultsRadio = $_POST['resultRadio'];
             $flipedResultsRadio = array_flip($flipResultsRadio);
-            $results = $flipedResultsRadio;
+            $mcqResults = $flipedResultsRadio;
         } elseif (!isset($_POST['resultRadio']) && isset($_POST['resultCheckbox'])) {
             $resultCheckbox = $_POST['resultCheckbox'];
-            $results = $resultCheckbox;        
+            $mcqResults = $resultCheckbox;        
         } elseif (isset($_POST['resultRadio']) && isset($_POST['resultCheckbox'])) {
             $flipResultsRadio = $_POST['resultRadio'];
             $resultCheckbox = $_POST['resultCheckbox'];
             $flipedResultsRadio = array_flip($flipResultsRadio);
-            $results = $flipedResultsRadio + $resultCheckbox;
+            $mcqResults = $flipedResultsRadio + $resultCheckbox;
         }
         
         if (isset($_POST['resultDigits'])){            
@@ -81,17 +81,19 @@ if (isset($_GET['quizId']) and !empty($_GET['quizId'])) {
                 
         if (isset($digitResults)) {
             if (isset($orderResults)) {
-            $results = $results + $digitResults + $orderResults;
+            $results = $mcqResults + $digitResults + $orderResults;
             } else {
-            $results = $results + $digitResults;    
+            $results = $mcqResults + $digitResults;    
             }
         } elseif (isset ($orderResults)) {
-        $results = $results + $orderResults;
-    }
-    
+        $results = $mcqResults + $orderResults;
+        } else {
+        $results = $mcqResults;   
+        }
+
         //Définition du nombre de questions répondues
         $uniqueQuestionID = array_unique($results);
-    //var_dump($uniqueQuestionID);
+    
         /* contrôle nb questions répondues / nb de bonnes réponses
          echo 'nb of questions answered: '.count($uniqueQuestionID);
          echo 'Good Results From Answered Questions :<br>';
@@ -116,7 +118,8 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
 
             if (isset($nbCorrectQuestions)) {
                 $score = ceil(($finalScore/count($question))*100).' % de bonnes réponses!';
-                //$scoreId = insertScoreQuiz($userId, $quizId, $score);
+                $scoreId = insertScoreQuiz($userId, $quizId, $score);
+                include '../../scores/controller/historic_answers_users_c.php';
                 include '../../scores/view/quiz_score.php';
                 
             }
@@ -135,7 +138,7 @@ $finalScore = $nbCorrectQuestions+(count($resultQuizDigit))+count($resultQuizOrd
     } else {
         header('location: ../../quizzes_list/controller/quizzes_list_c.php');
     }
-    }
+  //  }
     
     }
 

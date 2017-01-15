@@ -3,16 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>Liste des quizs</title>
-        <link rel="stylesheet" href="../view/quiz_details.css">
+        <link rel="stylesheet" href="../../quizz_details/view/quiz_details.css">
     </head>
     <body>
         <header>
             <nav>
-                <h5><a href="../../users/sign_in/control/sign_in_c.php">Se connecter</a></h5>
+                <h6><a href="../../users/sign_in/control/sign_in_c.php">Se connecter</a></h6>
                 <h4><a href="../../admin/controller/actions_admin_c.php">Création de quiz</a></h4>
                 <h5><a href="../../scores/controller/historic_scores_c.php">Les scores des quizs</a></h5>
+                <h5><a href="../../scores/controller/historic_users_scores_c.php">Historique de vos résultats</a></h5>
             </nav>
-            <h1>Liste des quizs :</h1>
+            <h3>Liste des quizs :</h3>
         </header>
         <section>
             
